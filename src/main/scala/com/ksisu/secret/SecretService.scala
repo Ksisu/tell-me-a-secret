@@ -5,10 +5,11 @@ import java.util.UUID
 import akka.actor.{Actor, Props}
 import akka.pattern.pipe
 import com.ksisu.secret.SecretService.{FindSecret, RemoveSecret, StoreSecret}
+import com.redis._
+import spray.json._
 
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
-
 object SecretService {
   def props() = Props(new SecretService())
 
@@ -20,7 +21,7 @@ object SecretService {
 
 class SecretService extends Actor {
 
-  var data = Map.empty[UUID, CreateSecretData]
+  val redisClient = new RedisClient("localhost", 6379)
 
   import context.dispatcher
 
@@ -32,7 +33,7 @@ class SecretService extends Actor {
 
   private def storeSecret(secret: CreateSecretData): Future[UUID] = {
     val uuid = UUID.randomUUID()
-    data += uuid -> secret
+    redisClient.set(uuid, secret.toJson.compactPrint)
 
     context.system.scheduler.scheduleOnce(Duration(secret.forgetAfter, "min")) {
       self ! RemoveSecret(uuid)
@@ -42,7 +43,7 @@ class SecretService extends Actor {
   }
 
   private def findSecret(uuid: UUID): Future[Option[ShowSecretData]] = {
-    val result = data.get(uuid)
+    val result = redisClient.get(uuid).map(_.parseJson.convertTo[CreateSecretData])
     result.foreach { secret =>
       if (secret.readOnlyOnce) {
         removeSecret(uuid)
@@ -52,6 +53,6 @@ class SecretService extends Actor {
   }
 
   private def removeSecret(uuid: UUID): Unit = {
-    data -= uuid
+    redisClient.del(uuid)
   }
 }

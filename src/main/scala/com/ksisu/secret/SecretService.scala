@@ -33,11 +33,7 @@ class SecretService extends Actor {
 
   private def storeSecret(secret: CreateSecretData): Future[UUID] = {
     val uuid = UUID.randomUUID()
-    redisClient.set(uuid, secret.toJson.compactPrint)
-
-    context.system.scheduler.scheduleOnce(Duration(secret.forgetAfter, "min")) {
-      self ! RemoveSecret(uuid)
-    }
+    redisClient.set(uuid, secret.toJson.compactPrint, false, Seconds(secret.forgetAfter * 60))
 
     Future.successful(uuid)
   }

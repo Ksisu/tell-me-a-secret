@@ -18,4 +18,4 @@ libraryDependencies ++= Seq(
 enablePlugins(JavaAppPackaging)
 enablePlugins(DockerPlugin)
 
-dockerExposedPorts := Seq(80)
+dockerExposedPorts := Seq(8080)

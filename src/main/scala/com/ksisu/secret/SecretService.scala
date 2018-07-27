@@ -21,7 +21,7 @@ object SecretService {
 
 class SecretService extends Actor {
 
-  val redisClient = new RedisClient("localhost", 6379)
+  val redisClient = new RedisClient("db", 6379)
 
   import context.dispatcher
 

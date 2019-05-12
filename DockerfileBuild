@@ -1,4 +1,0 @@
-FROM hseeberger/scala-sbt:8u171_2.12.6_1.1.6
-ADD . /app
-WORKDIR /app
-RUN sbt clean compile docker:stage

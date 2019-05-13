@@ -6,7 +6,7 @@ class ConfigService {
   private lazy val config: Config = ConfigFactory.load
 
   implicit lazy val redisConfig: RedisServiceImpl.Config = {
-    val c = config.atKey("database")
+    val c = config.getConfig("redis")
     RedisServiceImpl.Config(
       c.getString("host"),
       c.getInt("port")

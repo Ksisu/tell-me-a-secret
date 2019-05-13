@@ -1,6 +1,6 @@
 package com.ksisu.secret
 
-import com.ksisu.secret.service.impl.{ConfigService, HealthCheckServiceImpl, RedisServiceImpl, SecretServiceImpl}
+import com.ksisu.secret.service.impl._
 import com.ksisu.secret.service.{HealthCheckService, RedisService, SecretService}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -19,7 +19,7 @@ object Services {
       import cats.instances.future._
 
       override implicit val healthCheckService: HealthCheckService[Future] = new HealthCheckServiceImpl()
-      override implicit val redisService: RedisService[Future]             = new RedisServiceImpl()
+      override implicit val redisService: RedisService[Future]             = new RedisCryptorProxy(new RedisServiceImpl())
       override implicit val secretService: SecretService[Future]           = new SecretServiceImpl[Future]()
     }
   }

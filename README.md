@@ -18,6 +18,8 @@ Return example:
 {"uuid": "a1d0f826-9d44-4158-8894-2f35026dbabc"}
 ```
 
+---
+
 ```
 GET /api/secret/<<UUID>>
 ```
@@ -25,6 +27,18 @@ GET /api/secret/<<UUID>>
 Return example:
 ```
 {"secret": "MySecret"}
+```
+
+---
+
+How to run:
+```
+docker run \
+  -e REDIS_HOST=redis.example.com \
+  -e REDIS_PORT=6379 \
+  -e CYPTOR_SECRET=84AmEdqF7YTruR2o4^2BfwkSA0weHtEVgHz$7Rqy \
+  -p 8080:8080 \
+  ksisu/tell-me-a-secret
 ```
 
 ---

@@ -12,4 +12,12 @@ class ConfigService {
       c.getInt("port")
     )
   }
+
+  implicit lazy val cryptorConfig: RedisCryptorProxy.Config = {
+    val c = config.getConfig("cryptor")
+    RedisCryptorProxy.Config(
+      c.getString("secret"),
+      c.getInt("threads")
+    )
+  }
 }

@@ -36,7 +36,7 @@ How to run:
 docker run \
   -e REDIS_HOST=redis.example.com \
   -e REDIS_PORT=6379 \
-  -e CYPTOR_SECRET=84AmEdqF7YTruR2o4^2BfwkSA0weHtEVgHz$7Rqy \
+  -e CRYPTOR_SECRET=84AmEdqF7YTruR2o4^2BfwkSA0weHtEVgHz$7Rqy \
   -p 8080:8080 \
   ksisu/tell-me-a-secret
 ```

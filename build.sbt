@@ -4,7 +4,7 @@ lazy val commonSettings = Seq(
   scalaVersion := "2.13.0",
   organization := "com.ksisu",
   scalafmtOnCompile := true,
-  version := "0.2"
+  version := "1.0.0"
 )
 
 lazy val ItTest         = config("it") extend Test

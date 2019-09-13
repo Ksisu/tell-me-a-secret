@@ -35,10 +35,10 @@ lazy val core = (project in file("."))
     ),
     libraryDependencies ++= {
       val akkaHttpV = "10.1.9"
-      val akkaV     = "2.5.24"
+      val akkaV     = "2.5.25"
       Seq(
         "net.debasishg"        %% "redisclient"             % "3.10",
-        "org.typelevel"        %% "cats-core"               % "2.0.0-RC1",
+        "org.typelevel"        %% "cats-core"               % "2.0.0",
         "com.typesafe.akka"    %% "akka-http"               % akkaHttpV,
         "com.typesafe.akka"    %% "akka-http-spray-json"    % akkaHttpV,
         "com.typesafe.akka"    %% "akka-http-testkit"       % akkaHttpV % "it,test",
@@ -47,7 +47,7 @@ lazy val core = (project in file("."))
         "com.typesafe.akka"    %% "akka-slf4j"              % akkaV,
         "com.typesafe.akka"    %% "akka-testkit"            % akkaV % "it,test",
         "ch.qos.logback"       % "logback-classic"          % "1.2.3",
-        "net.logstash.logback" % "logstash-logback-encoder" % "6.1",
+        "net.logstash.logback" % "logstash-logback-encoder" % "6.2",
         "org.slf4j"            % "jul-to-slf4j"             % "1.7.28",
         "ch.megard"            %% "akka-http-cors"          % "0.4.1",
         "org.scalatest"        %% "scalatest"               % "3.0.8" % "it,test"

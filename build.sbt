@@ -1,7 +1,7 @@
 import org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.0",
+  scalaVersion := "2.13.1",
   organization := "com.ksisu",
   scalafmtOnCompile := true,
   version := "1.0.0"
@@ -34,18 +34,16 @@ lazy val core = (project in file("."))
       "-Xlint"
     ),
     libraryDependencies ++= {
-      val akkaHttpV = "10.1.9"
-      val akkaV     = "2.5.25"
       Seq(
         "net.debasishg"        %% "redisclient"             % "3.10",
         "org.typelevel"        %% "cats-core"               % "2.0.0",
-        "com.typesafe.akka"    %% "akka-http"               % akkaHttpV,
-        "com.typesafe.akka"    %% "akka-http-spray-json"    % akkaHttpV,
-        "com.typesafe.akka"    %% "akka-http-testkit"       % akkaHttpV % "it,test",
-        "com.typesafe.akka"    %% "akka-actor"              % akkaV,
-        "com.typesafe.akka"    %% "akka-stream"             % akkaV,
-        "com.typesafe.akka"    %% "akka-slf4j"              % akkaV,
-        "com.typesafe.akka"    %% "akka-testkit"            % akkaV % "it,test",
+        "com.typesafe.akka"    %% "akka-http"               % "10.1.10",
+        "com.typesafe.akka"    %% "akka-http-spray-json"    % "10.1.10",
+        "com.typesafe.akka"    %% "akka-http-testkit"       % "10.1.10" % "it,test",
+        "com.typesafe.akka"    %% "akka-actor"              % "2.5.25",
+        "com.typesafe.akka"    %% "akka-stream"             % "2.5.25",
+        "com.typesafe.akka"    %% "akka-slf4j"              % "2.5.25",
+        "com.typesafe.akka"    %% "akka-testkit"            % "2.5.25" % "it,test",
         "ch.qos.logback"       % "logback-classic"          % "1.2.3",
         "net.logstash.logback" % "logstash-logback-encoder" % "6.2",
         "org.slf4j"            % "jul-to-slf4j"             % "1.7.28",
@@ -62,6 +60,12 @@ enablePlugins(JavaAppPackaging)
 enablePlugins(BuildInfoPlugin)
 cancelable in Global := true
 
+lazy val buildTime                       = java.time.ZonedDateTime.now(java.time.ZoneOffset.UTC)
+lazy val builtAtMillis: SettingKey[Long] = SettingKey[Long]("builtAtMillis", "time of build")
+ThisBuild / builtAtMillis := buildTime.toInstant.toEpochMilli
+lazy val builtAtString: SettingKey[String] = SettingKey[String]("builtAtString", "time of build")
+ThisBuild / builtAtString := buildTime.toString
+
 lazy val buildInfoSettings = Seq(
   buildInfoKeys := Seq[BuildInfoKey](
     name,
@@ -70,8 +74,9 @@ lazy val buildInfoSettings = Seq(
     sbtVersion,
     BuildInfoKey.action("commitHash") {
       git.gitHeadCommit.value
-    }
+    },
+    builtAtString,
+    builtAtMillis
   ),
-  buildInfoOptions := Seq(BuildInfoOption.BuildTime),
   buildInfoPackage := "com.ksisu.secret"
 )

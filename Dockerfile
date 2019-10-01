@@ -1,22 +1,19 @@
-FROM hseeberger/scala-sbt:8u181_2.12.8_1.2.8 as builder
+FROM hseeberger/scala-sbt:8u222_1.3.2_2.13.1 as builder
+WORKDIR /app
 COPY build.sbt /app/build.sbt
 COPY project /app/project
-WORKDIR /app
-RUN sbt update test:update it:update
+RUN sbt update
 COPY . .
-RUN sbt compile test stage
+RUN sbt stage && \
+    chmod -R u=rX,g=rX /app/target/universal/stage && \
+    chmod u+x,g+x /app/target/universal/stage/bin/tell-me-a-secret
 
-
-FROM openjdk:8
-WORKDIR /app
-COPY --from=builder /app/target/universal/stage /app
+FROM openjdk:8-alpine
 USER root
-RUN useradd --system --create-home --uid 1001 --gid 0 tell-me-a-secret && \
-    chmod -R u=rX,g=rX /app && \
-    chmod u+x,g+x /app/bin/tell-me-a-secret && \
-    chown -R 1001:root /app
+RUN apk add --no-cache bash && \
+    adduser -S -u 1001 tell-me-a-secret
 USER 1001
-
 EXPOSE 8080
 ENTRYPOINT ["/app/bin/tell-me-a-secret"]
 CMD []
+COPY --from=builder --chown=1001:root /app/target/universal/stage /app

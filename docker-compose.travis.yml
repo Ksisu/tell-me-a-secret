@@ -1,0 +1,14 @@
+version: '3'
+services:
+  tell-me-a-secret:
+    image: hseeberger/scala-sbt:8u212_1.2.8_2.13.0
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      REDIS_HOST: "redis"
+    depends_on:
+      - redis
+    command: sleep 5000
+  redis:
+    image: redis:5.0.4

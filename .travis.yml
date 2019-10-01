@@ -1,0 +1,12 @@
+sudo: required
+
+branches:
+  only:
+    - master
+
+services:
+  - docker
+
+script:
+  - docker-compose -f docker-compose.travis.yml up -d
+  - docker-compose -f docker-compose.travis.yml exec tell-me-a-secret sbt -mem 2048 clean compile test it:test

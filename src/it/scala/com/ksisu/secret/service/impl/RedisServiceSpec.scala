@@ -1,6 +1,7 @@
 package com.ksisu.secret.service.impl
 
 import com.ksisu.secret.service.RedisService
+import com.typesafe.config.ConfigFactory
 import org.scalatest.{Matchers, WordSpecLike}
 
 import scala.concurrent.{Await, Future}
@@ -13,7 +14,9 @@ class RedisServiceSpec extends WordSpecLike with Matchers {
 
   def await[T](f: Future[T]): T = Await.result(f, 5.seconds)
 
-  implicit val config: RedisServiceImpl.Config = RedisServiceImpl.Config("localhost", 6379)
+  private val config = ConfigFactory.load()
+  implicit val redisConf: RedisServiceImpl.Config =
+    RedisServiceImpl.Config(config.getString("redis.host"), config.getInt("redis.port"))
 
   val serivces: Seq[(String, RedisService[Future])] = Seq(
     "memory" -> new RedisServiceMemoryImpl[Future](),

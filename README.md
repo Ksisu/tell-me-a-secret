@@ -1,4 +1,5 @@
 # Tell Me A Secret
+[![Build Status](https://travis-ci.org/Ksisu/tell-me-a-secret.svg?branch=master)](https://travis-ci.org/Ksisu/tell-me-a-secret)
 [![Mergify Status](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/Ksisu/tell-me-a-secret&style=flat)](https://mergify.io)
 It's a microservice to store short-live-secrets in redis.
 

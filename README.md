@@ -1,4 +1,5 @@
 # Tell Me A Secret
+[![Mergify Status](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/Ksisu/tell-me-a-secret&style=flat)](https://mergify.io)
 It's a microservice to store short-live-secrets in redis.
 
 ```

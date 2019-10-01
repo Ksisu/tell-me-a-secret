@@ -9,4 +9,4 @@ services:
 
 script:
   - docker-compose -f docker-compose.travis.yml up -d
-  - docker-compose -f docker-compose.travis.yml exec tell-me-a-secret sbt -mem 2048 clean compile test it:test
+  - docker-compose -f docker-compose.travis.yml exec tell-me-a-secret sbt -Dsbt.supershell=false clean compile test it:test

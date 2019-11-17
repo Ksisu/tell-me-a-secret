@@ -9,7 +9,6 @@ import com.ksisu.secret.service.HealthCheckService
 import scala.concurrent.Future
 
 class HealthCheckApi()(implicit service: HealthCheckService[Future]) extends Api {
-
   def route(): Route = {
     path("healthCheck") {
       get {

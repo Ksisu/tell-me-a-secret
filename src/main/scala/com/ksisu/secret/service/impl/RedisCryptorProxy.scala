@@ -10,7 +10,6 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class RedisCryptorProxy(redisService: RedisService[Future])(implicit conf: RedisCryptorProxy.Config)
     extends RedisService[Future] {
-
   private implicit val ec: ExecutionContext = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(conf.threads))
 
   override def store(value: String, time: FiniteDuration): Future[String] = {

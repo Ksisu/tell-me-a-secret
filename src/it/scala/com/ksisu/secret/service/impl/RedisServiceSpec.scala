@@ -8,7 +8,6 @@ import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
 
 class RedisServiceSpec extends WordSpecLike with Matchers {
-
   import scala.concurrent.ExecutionContext.Implicits.global
   import cats.instances.future._
 
@@ -42,5 +41,4 @@ class RedisServiceSpec extends WordSpecLike with Matchers {
         }
       }
   }
-
 }

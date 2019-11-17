@@ -5,7 +5,6 @@ import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.{Matchers, WordSpecLike}
 
 class ApiSpec extends WordSpecLike with Matchers with ScalatestRouteTest {
-
   "#createRoute" when {
     "empty route" in {
       val result = Api.createRoute(Seq.empty)
@@ -36,5 +35,4 @@ class ApiSpec extends WordSpecLike with Matchers with ScalatestRouteTest {
   }
 
   private def createApi(name: String): Api = () => path(name)(complete("ok"))
-
 }

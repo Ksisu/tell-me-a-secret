@@ -15,7 +15,6 @@ import scala.concurrent.Future
 import scala.concurrent.duration._
 
 class SecretApi()(implicit serviceService: SecretService[Future]) extends Api {
-
   implicit val timeout: Timeout = Timeout(5.seconds)
 
   def route(): Route =
@@ -38,5 +37,4 @@ class SecretApi()(implicit serviceService: SecretService[Future]) extends Api {
     } ~ {
       complete(HttpResponse(NotFound))
     }
-
 }

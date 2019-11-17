@@ -8,7 +8,6 @@ import spray.json._
 import scala.util.{Success, Try}
 
 class SecretServiceImplSpec extends WordSpecLike with Matchers {
-
   trait TestScope {
     val nowInMillis: Long = 100L
     implicit lazy val redisServiceMock: RedisServiceMemoryImpl[Try] = new RedisServiceMemoryImpl[Try]() {

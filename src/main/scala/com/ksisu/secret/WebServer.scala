@@ -11,7 +11,6 @@ import scala.concurrent.duration._
 import scala.util.{Failure, Success}
 
 object WebServer {
-
   def main(args: Array[String]): Unit = {
     LoggerUtil.initBridge()
     val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)

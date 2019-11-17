@@ -8,7 +8,6 @@ import javax.crypto.{Cipher, KeyGenerator, SecretKey}
 
 // https://gist.github.com/Ksisu/da36ead2a76e150220a531a5296bf603
 object Cryptor {
-
   private val AES_KEY_SIZE               = 256
   private val AES_KEY_SIZE_IN_BYTE       = AES_KEY_SIZE / 8
   private val IV_SIZE                    = 128

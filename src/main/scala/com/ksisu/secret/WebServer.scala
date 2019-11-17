@@ -3,7 +3,6 @@ package com.ksisu.secret
 import akka.Done
 import akka.actor.{ActorSystem, CoordinatedShutdown}
 import akka.http.scaladsl.Http
-import akka.stream.ActorMaterializer
 import com.ksisu.secret.util.LoggerUtil
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -15,8 +14,7 @@ object WebServer {
     LoggerUtil.initBridge()
     val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
 
-    implicit val system: ActorSystem             = ActorSystem("tell-me-a-secret")
-    implicit val materializer: ActorMaterializer = ActorMaterializer()
+    implicit val system: ActorSystem = ActorSystem("tell-me-a-secret")
     import system.dispatcher
 
     val services = Services.getReal()

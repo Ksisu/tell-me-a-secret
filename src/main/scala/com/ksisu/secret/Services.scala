@@ -18,8 +18,8 @@ object Services {
       import config._
       import cats.instances.future._
 
-      override implicit val healthCheckService: HealthCheckService[Future] = new HealthCheckServiceImpl()
       override implicit val redisService: RedisService[Future]             = new RedisCryptorProxy(new RedisServiceImpl())
+      override implicit val healthCheckService: HealthCheckService[Future] = new HealthCheckServiceImpl()
       override implicit val secretService: SecretService[Future]           = new SecretServiceImpl[Future]()
     }
   }

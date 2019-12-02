@@ -48,7 +48,7 @@ lazy val core = (project in file("."))
         "net.logstash.logback" % "logstash-logback-encoder" % "6.2",
         "org.slf4j"            % "jul-to-slf4j"             % "1.7.29",
         "ch.megard"            %% "akka-http-cors"          % "0.4.2",
-        "org.scalatest"        %% "scalatest"               % "3.0.8" % "it,test"
+        "org.scalatest"        %% "scalatest"               % "3.1.0" % "it,test"
       )
     }
   )

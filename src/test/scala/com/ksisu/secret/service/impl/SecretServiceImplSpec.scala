@@ -2,12 +2,13 @@ package com.ksisu.secret.service.impl
 
 import cats.instances.try_._
 import com.ksisu.secret.service.SecretService._
-import org.scalatest.{Matchers, WordSpecLike}
 import spray.json._
 
 import scala.util.{Success, Try}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 
-class SecretServiceImplSpec extends WordSpecLike with Matchers {
+class SecretServiceImplSpec extends AnyWordSpecLike with Matchers {
   trait TestScope {
     val nowInMillis: Long = 100L
     implicit lazy val redisServiceMock: RedisServiceMemoryImpl[Try] = new RedisServiceMemoryImpl[Try]() {

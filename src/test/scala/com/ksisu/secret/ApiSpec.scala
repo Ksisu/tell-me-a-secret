@@ -2,9 +2,10 @@ package com.ksisu.secret
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.testkit.ScalatestRouteTest
-import org.scalatest.{Matchers, WordSpecLike}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 
-class ApiSpec extends WordSpecLike with Matchers with ScalatestRouteTest {
+class ApiSpec extends AnyWordSpecLike with Matchers with ScalatestRouteTest {
   "#createRoute" when {
     "empty route" in {
       val result = Api.createRoute(Seq.empty)

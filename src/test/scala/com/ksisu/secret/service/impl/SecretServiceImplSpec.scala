@@ -1,6 +1,4 @@
 package com.ksisu.secret.service.impl
-
-import cats.instances.try_._
 import com.ksisu.secret.service.SecretService._
 import spray.json._
 

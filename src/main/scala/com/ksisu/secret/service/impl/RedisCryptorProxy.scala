@@ -15,9 +15,7 @@ class RedisCryptorProxy(redisService: RedisService[Future])(implicit conf: Redis
   override def store(value: String, time: FiniteDuration): Future[String] = {
     Future {
       Cryptor.encrypt(value, secret)
-    }.flatMap { data =>
-      redisService.store(data, time)
-    }
+    }.flatMap { data => redisService.store(data, time) }
   }
 
   override def find(key: String): Future[Option[String]] = {

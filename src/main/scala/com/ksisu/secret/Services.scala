@@ -16,7 +16,6 @@ object Services {
     val config = new ConfigService()
     new Services[Future] {
       import config._
-      import cats.instances.future._
 
       override implicit val redisService: RedisService[Future]             = new RedisCryptorProxy(new RedisServiceImpl())
       override implicit val healthCheckService: HealthCheckService[Future] = new HealthCheckServiceImpl()
